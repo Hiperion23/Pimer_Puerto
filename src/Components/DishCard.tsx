@@ -6,13 +6,21 @@ export interface Dish {
   price: string
   description?: string
   image?: string
+  images?: string[]
   tags?: string[]
 }
 
-const DishCard: React.FC<{ dish: Dish }> = ({ dish }) => {
+interface Props {
+  dish: Dish
+  onClick: () => void
+}
+
+const DishCard: React.FC<Props> = ({ dish, onClick }) => {
   return (
-    <article className="bg-white rounded-2xl shadow-sm overflow-hidden border hover:shadow-md transition-shadow">
-      
+    <article
+      onClick={onClick}
+      className="bg-white rounded-2xl shadow-sm overflow-hidden border hover:shadow-md transition cursor-pointer"
+    >
       <div className="h-44 overflow-hidden bg-gray-100">
         {dish.image ? (
           <img
@@ -33,23 +41,9 @@ const DishCard: React.FC<{ dish: Dish }> = ({ dish }) => {
 
         <div className="mt-3 flex items-center justify-between">
           <div className="text-sky-700 font-semibold">{dish.price}</div>
-          <button className="text-sm px-3 py-1 rounded-md border hover:bg-sky-50">
-            Agregar
-          </button>
-        </div>
-
-        <div className="mt-3 flex flex-wrap gap-2">
-          {(dish.tags || []).map(t => (
-            <span
-              key={t}
-              className="text-xs bg-sky-50 px-2 py-1 rounded-full text-sky-700"
-            >
-              {t}
-            </span>
-          ))}
+          <span className="text-sm text-gray-400">Ver más</span>
         </div>
       </div>
-
     </article>
   )
 }
