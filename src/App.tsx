@@ -8,7 +8,7 @@ import Contact from "./Pages/Contact";
 
 export default function App() {
 return (
-<div className="min-h-screen flex flex-col text-gray-800 bg-gradient-to-b from-white via-sky-50 to-white">
+<div className="min-h-screen flex flex-col text-gray-800 bg-linear-to-b from-white via-sky-50 to-white">
 <Navbar />
 
 

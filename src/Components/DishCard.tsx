@@ -1,24 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
 export interface Dish {
+  allergens: any
   id: string
   name: string
   price: string
   description?: string
   image?: string
   images?: string[]
+  ingredients?: string[]
   tags?: string[]
 }
 
 interface Props {
   dish: Dish
-  onClick: () => void
+  onClick: (dish: Dish) => void
 }
 
 const DishCard: React.FC<Props> = ({ dish, onClick }) => {
   return (
     <article
-      onClick={onClick}
+      onClick={() => onClick(dish)}
       className="bg-white rounded-2xl shadow-sm overflow-hidden border hover:shadow-md transition cursor-pointer"
     >
       <div className="h-44 overflow-hidden bg-gray-100">
