@@ -69,12 +69,12 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-linear-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
               
-              <Link
+              {/* <Link
                 to="/contact"
                 className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 Reservar Mesa
-              </Link>
+              </Link> */}
             </div>
 
             {/* Info Cards */}
