@@ -10,13 +10,41 @@ import pulpoImg from '../assets/images/dishes/pulpo.png'
 import anticuchoImg from '../assets/images/dishes/anticucho.png'
 import tallarinSaltadoImg from '../assets/images/dishes/tallarin_saltado.png'
 import pastaImg from '../assets/images/dishes/pasta.png'
+import sudadoImg from '../assets/images/dishes/sudado_pescado.png'
 
 const featuredDishes: Dish[] = [
   {
-    id: '21',
-    name: 'Pulpo a la Parrilla',
+    id: '34',
+    name: 'Sudado de Pescado Entero',
+    price: '$8.000',
+    description: 'Sudado tradicional.',
+    image: sudadoImg,
+    images: [sudadoImg],
+    tags: ['Sudados'],
+    ingredients: ['Pescado entero', 'Cebolla', 'Tomate', 'Cilantro'],
+    allergens: ['Pescado']
+  },
+  {
+    id: '35',
+    name: 'Sudado de Pescado con Mariscos',
     price: '$10.000',
-    description: 'Pulpo anticuchero con papas rústicas.',
+    description: 'Sudado con mariscos.',
+    image: sudadoImg,
+    images: [sudadoImg],
+    tags: ['Sudados'],
+    ingredients: [
+      'Pescado entero',
+      'Pulpo',
+      'Camarón',
+      'Calamar'
+    ],
+    allergens: ['Pescado', 'Mariscos']
+  },
+  {
+    id: '21',
+    name: 'Pulpo a la Parrilla Mi primer puerto',
+    price: '$12.000',
+    description: 'Pulpo tierno de las costas ariqueñas, bañado en salsa anticuchera y chimichurri, acompañado de papas rústicas.',
     image: pulpoImg,
     images: [pulpoImg],
     tags: ['Especialidades'],
@@ -48,14 +76,14 @@ const featuredDishes: Dish[] = [
   {
     id: '24',
     name: 'Fetuccini al Ajillo con Camarones',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Pasta al ajillo.',
     image: pastaImg,
     images: [pastaImg],
     tags: ['Especialidades'],
     ingredients: ['Fetuccini', 'Camarones', 'Ajo', 'Aceite de oliva'],
     allergens: ['Gluten', 'Mariscos']
-  }
+  },
 ]
 
 export default function Home() {

@@ -25,6 +25,23 @@ import chaufaCarneImg from '../assets/images/dishes/chaufa_carne.png'
 import chicharonPolloImg from '../assets/images/dishes/chicharon_pollo.png'
 import chicharonMixtoImg from '../assets/images/dishes/chicharon_mixto.png'
 import tallarinSaltadoImg from '../assets/images/dishes/tallarin_saltado.png'
+import sudadoImg from '../assets/images/dishes/sudado_pescado.png'
+import risoto_camaronImg from '../assets/images/dishes/risoto_camaron.png'
+import papaRusticaImg from '../assets/images/dishes/papa_rustica.png'
+import papaFritaImg from '../assets/images/dishes/papa_frita.png'
+import camoteImg from '../assets/images/dishes/chifle_camote.png'
+import canchaImg from '../assets/images/dishes/canchita.png'
+import arrozBlancoImg from '../assets/images/dishes/arroz_blanco.png'
+import costillar1Img from '../assets/images/dishes/costillar1.png'
+import costillar2Img from '../assets/images/dishes/costillar2.png'
+import polloPapaImg from '../assets/images/dishes/pollo_papa.png'
+import polloChaufaImg from '../assets/images/dishes/pollo_chaufa.png'
+import pescadoFritoImg from '../assets/images/dishes/pescado_frito.png'
+import arozChaufaImg from '../assets/images/dishes/arroz_chaufa.png'
+import papaDoradaImg from '../assets/images/dishes/papa_dorada.png'
+import lecheDeTigreImg from '../assets/images/dishes/leche_tigre.png'
+import risottoVeganoImg from '../assets/images/dishes/risotto_vegano.png'
+import SaltadoVeganoImg from '../assets/images/dishes/saltado_vegano.png'
 const dishes: Dish[] = [
   // ======================
   // 🐟 CARTA CEVICHERA
@@ -32,7 +49,7 @@ const dishes: Dish[] = [
   {
     id: '1',
     name: 'Ceviche de Pescado',
-    price: '$6.000',
+    price: '$7.000',
     description: 'Ceviche clásico peruano.',
     image: cevicheImg,
     images: [cevicheImg],
@@ -43,7 +60,7 @@ const dishes: Dish[] = [
   {
     id: '2',
     name: 'Ceviche Mixto',
-    price: '$7.000',
+    price: '$9.000',
     description: 'Ceviche con mariscos.',
     image: mixtoImg,
     images: [mixtoImg],
@@ -54,7 +71,7 @@ const dishes: Dish[] = [
   {
     id: '3',
     name: 'Pulpo al Olivo',
-    price: '$6.000',
+    price: '$7.000',
     description: 'Pulpo suave con salsa de aceituna.',
     image: pulpoImg,
     images: [pulpoImg],
@@ -69,7 +86,7 @@ const dishes: Dish[] = [
   {
     id: '4',
     name: 'Picante de Guata',
-    price: '$6.000',
+    price: '$7.000',
     description: 'Plato típico tarapacino.',
     image: guataImg,
     images: [guataImg],
@@ -80,7 +97,7 @@ const dishes: Dish[] = [
   {
     id: '5',
     name: 'Picante de Pulpo',
-    price: '$7.000',
+    price: '$10.000',
     description: 'Pulpo en salsa picante.',
     image: picanteImg,
     images: [picanteImg],
@@ -91,7 +108,7 @@ const dishes: Dish[] = [
   {
     id: '6',
     name: 'Picante de Camarón',
-    price: '$7.000',
+    price: '$9.000',
     description: 'Camarones en salsa tradicional.',
     image: camaronImg,
     images: [camaronImg],
@@ -102,7 +119,7 @@ const dishes: Dish[] = [
   {
     id: '7',
     name: 'Picante Mixto',
-    price: '$8.000',
+    price: '$10.000',
     description: 'Pulpo, camarón y calamar.',
     image: picanteImg,
     images: [picanteImg],
@@ -117,7 +134,7 @@ const dishes: Dish[] = [
   {
     id: '8',
     name: 'Saltado de Carne',
-    price: '$7.000',
+    price: '$8.000',
     description: 'Clásico peruano.',
     image: lomoImg,
     images: [lomoImg],
@@ -128,7 +145,7 @@ const dishes: Dish[] = [
   {
     id: '9',
     name: 'Saltado de Pollo',
-    price: '$6.000',
+    price: '$7.000',
     description: 'Pollo salteado al wok.',
     image: polloSaltadoImg,
     images: [polloSaltadoImg],
@@ -139,7 +156,7 @@ const dishes: Dish[] = [
   {
     id: '10',
     name: 'Saltado de Pescado',
-    price: '$7.000',
+    price: '$8.000',
     description: 'Pescado salteado estilo peruano.',
     image: lomoImg,
     images: [lomoImg],
@@ -150,7 +167,7 @@ const dishes: Dish[] = [
   {
     id: '11',
     name: 'Saltado Mar y Tierra',
-    price: '$8.000',
+    price: '$10.000',
     description: 'Carne, camarón y pulpo.',
     image: marytierraImg,
     images: [marytierraImg],
@@ -165,7 +182,7 @@ const dishes: Dish[] = [
   {
     id: '12',
     name: 'Chaufa de Pollo',
-    price: '$6.000',
+    price: '$7.000',
     description: 'Arroz chaufa tradicional.',
     image: chaufaPolloImg,
     images: [chaufaPolloImg],
@@ -187,7 +204,7 @@ const dishes: Dish[] = [
   {
     id: '14',
     name: 'Chaufa de Mariscos',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Chaufa marino.',
     image: chaufaImg,
     images: [chaufaImg],
@@ -198,7 +215,7 @@ const dishes: Dish[] = [
   {
     id: '15',
     name: 'Chaufa de Pulpo',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Pulpo salteado con arroz.',
     image: chaufaImg,
     images: [chaufaImg],
@@ -220,7 +237,7 @@ const dishes: Dish[] = [
   {
     id: '17',
     name: 'Arroz con Mariscos',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Arroz cremoso marino.',
     image: arrozImg,
     images: [arrozImg],
@@ -235,7 +252,7 @@ const dishes: Dish[] = [
   {
     id: '18',
     name: 'Chicharrón de Pollo',
-    price: '$6.000',
+    price: '$7.000',
     description: 'Pollo crocante.',
     image: chicharonPolloImg,
     images: [chicharonPolloImg],
@@ -246,7 +263,7 @@ const dishes: Dish[] = [
   {
     id: '19',
     name: 'Chicharrón de Pescado',
-    price: '$6.000',
+    price: '$8.000',
     description: 'Pescado frito.',
     image: chicharronImg,
     images: [chicharronImg],
@@ -257,7 +274,7 @@ const dishes: Dish[] = [
   {
     id: '20',
     name: 'Chicharrón Mixto Marino',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Mariscos fritos.',
     image: chicharonMixtoImg,
     images: [chicharonMixtoImg],
@@ -270,10 +287,37 @@ const dishes: Dish[] = [
   // ⭐ ESPECIALIDADES
   // ======================
   {
-    id: '21',
-    name: 'Pulpo a la Parrilla',
+    id: '34',
+    name: 'Sudado de Pescado Entero',
+    price: '$8.000',
+    description: 'Sudado tradicional.',
+    image: sudadoImg,
+    images: [sudadoImg],
+    tags: ['Sudados'],
+    ingredients: ['Pescado entero', 'Cebolla', 'Tomate', 'Cilantro'],
+    allergens: ['Pescado']
+  },
+  {
+    id: '35',
+    name: 'Sudado de Pescado con Mariscos',
     price: '$10.000',
-    description: 'Pulpo anticuchero con papas rústicas.',
+    description: 'Sudado con mariscos.',
+    image: sudadoImg,
+    images: [sudadoImg],
+    tags: ['Sudados'],
+    ingredients: [
+      'Pescado entero',
+      'Pulpo',
+      'Camarón',
+      'Calamar'
+    ],
+    allergens: ['Pescado', 'Mariscos']
+  },
+  {
+    id: '21',
+    name: 'Pulpo a la Parrilla Mi primer puerto',
+    price: '$12.000',
+    description: 'Pulpo tierno de las costas ariqueñas, bañado en salsa anticuchera y chimichurri, acompañado de papas rústicas.',
     image: pulpoImg,
     images: [pulpoImg],
     tags: ['Especialidades'],
@@ -305,14 +349,237 @@ const dishes: Dish[] = [
   {
     id: '24',
     name: 'Fetuccini al Ajillo con Camarones',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Pasta al ajillo.',
     image: pastaImg,
     images: [pastaImg],
     tags: ['Especialidades'],
     ingredients: ['Fetuccini', 'Camarones', 'Ajo', 'Aceite de oliva'],
     allergens: ['Gluten', 'Mariscos']
-  }
+  },
+    // ======================
+  // 🍝 PASTAS Y RISOTTOS
+  // ======================
+  {
+    id: '25',
+    name: 'Fetuccini Fruto del Mar',
+    price: '$9.000',
+    description: 'Pasta en salsa americana con mariscos.',
+    image: pastaImg,
+    images: [pastaImg],
+    tags: ['Pastas'],
+    ingredients: [
+      'Fetuccini',
+      'Salsa americana',
+      'Camarón',
+      'Pulpo',
+      'Calamar'
+    ],
+    allergens: ['Gluten', 'Mariscos']
+  },
+  {
+    id: '26',
+    name: 'Risotto de Camarones',
+    price: '$10.000',
+    description: 'Risotto cremoso con camarones.',
+    image: risoto_camaronImg,
+    images: [risoto_camaronImg],
+    tags: ['Risottos'],
+    ingredients: ['Arroz arborio', 'Camarones', 'Queso', 'Mantequilla'],
+    allergens: ['Mariscos', 'Lácteos']
+  },
+  {
+    id: '27',
+    name: 'Risotto Fruto del Mar',
+    price: '$10.000',
+    description: 'Risotto marino cremoso.',
+    image: risoto_camaronImg,
+    images: [risoto_camaronImg],
+    tags: ['Risottos'],
+    ingredients: ['Arroz arborio', 'Pulpo', 'Camarón', 'Calamar'],
+    allergens: ['Mariscos', 'Lácteos']
+  },
+
+  // ======================
+  // 🥬 PLATOS VEGETARIANOS
+  // ======================
+  {
+    id: '28',
+    name: 'Saltado Vegetariano',
+    price: '$7.000',
+    description: 'Salteado de verduras al wok.',
+    image: SaltadoVeganoImg,
+    images: [SaltadoVeganoImg],
+    tags: ['Vegetariano'],
+    ingredients: ['Champiñones', 'Verduras mixtas', 'Sillao', 'Papa frita'],
+    allergens: undefined
+  },
+  {
+    id: '29',
+    name: 'Risotto Vegetariano',
+    price: '$7.000',
+    description: 'Risotto de champiñones y verduras.',
+    image: risottoVeganoImg,
+    images: [risottoVeganoImg],
+    tags: ['Vegetariano'],
+    ingredients: ['Arroz arborio', 'Champiñones', 'Verduras'],
+    allergens: ['Lácteos']
+  },
+
+  // ======================
+  // 🍖 CARNES Y POLLO
+  // ======================
+  {
+    id: '30',
+    name: 'Costillar al Horno BBQ',
+    price: '$8.000',
+    description: 'Costillar al horno con salsa BBQ.',
+    image: costillar1Img,
+    images: [costillar1Img, costillar2Img],
+    tags: ['Carnes'],
+    ingredients: ['Costillar de cerdo', 'Salsa BBQ', 'Papa rústica', 'Merkén'],
+    allergens: undefined
+  },
+  {
+    id: '31',
+    name: 'Pollo Broaster',
+    price: '$7.000',
+    description: 'Pollo crujiente acompañado a elección.',
+    image: polloChaufaImg,
+    images: [polloChaufaImg,polloPapaImg],
+    tags: ['Carnes'],
+    ingredients: [
+      'Pollo broaster',
+      'Chaufa o papa frita (a elección)'
+    ],
+    allergens: ['Gluten']
+  },
+
+  // ======================
+  // 🐟 PESCADOS
+  // ======================
+  {
+    id: '32',
+    name: 'Pescado Frito Mi Primer Puerto',
+    price: '$9.000',
+    description: 'Pesca del día frita.',
+    image: pescadoFritoImg,
+    images: [pescadoFritoImg],
+    tags: ['Pescados'],
+    ingredients: [
+      'Pesca del día (zargo, lenguado, bonito, cojinova)'
+    ],
+    allergens: ['Pescado']
+  },
+
+  // ======================
+  // 🥣 LECHES DE TIGRE
+  // ======================
+  {
+    id: '33',
+    name: 'Leche de Tigre Tradicional Mi Primer Puerto',
+    price: '$8.000',
+    description: 'Leche de tigre tradicional con acompañamientos.',
+    image: lecheDeTigreImg,
+    images: [lecheDeTigreImg],
+    tags: ['Carta Cevichera'],
+    ingredients: [
+      'Salsa de rocoto',
+      'Salsa de ají amarillo',
+      'Chicharrón',
+      'Cancha',
+      'Chifle',
+      'Camote'
+    ],
+    allergens: ['Pescado']
+  },
+
+  // ======================
+  // 🍲 SUDADOS
+  // ======================
+  
+  // ======================
+  // 🍟 GUARNICIONES
+  // ======================
+  {
+    id: '36',
+    name: 'Papa Rústica',
+    price: '$1.500',
+    description: 'Guarnición.',
+    image: papaRusticaImg,
+    images: [papaRusticaImg],
+    tags: ['Guarniciones'],
+    ingredients: ['Papa'],
+    allergens: undefined
+  },
+  {
+    id: '37',
+    name: 'Arroz Chaufa',
+    price: '$2.500',
+    description: 'Guarnición.',
+    image: arozChaufaImg,
+    images: [arozChaufaImg],
+    tags: ['Guarniciones'],
+    ingredients: ['Arroz', 'Huevo', 'Cebollín'],
+    allergens: undefined
+  },
+  {
+    id: '38',
+    name: 'Chifle de Camote',
+    price: '$1.500',
+    description: 'Guarnición.',
+    image: camoteImg,
+    images: [camoteImg],
+    tags: ['Guarniciones'],
+    ingredients: ['Camote'],
+    allergens: undefined
+  },
+  {
+    id: '39',
+    name: 'Canchita',
+    price: '$1.500',
+    description: 'Guarnición.',
+    image: canchaImg,
+    images: [canchaImg],
+    tags: ['Guarniciones'],
+    ingredients: ['Maíz'],
+    allergens: undefined
+  },
+    {
+    id: '40',
+    name: 'Papa Dorada',
+    price: '$1.500',
+    description: 'Guarnición.',
+    image: papaDoradaImg,
+    images: [papaDoradaImg],
+    tags: ['Guarniciones'],
+    ingredients: ['Papa'],
+    allergens: undefined
+  },
+  {
+    id: '41',
+    name: 'Arroz blanco',
+    price: '$1.500',
+    description: 'Guarnición.',
+    image: arrozBlancoImg,
+    images: [arrozBlancoImg],
+    tags: ['Guarniciones'],
+    ingredients: ['Arroz'],
+    allergens: undefined
+  },
+  {
+    id: '42',
+    name: 'Papa Frita',
+    price: '$1.500',
+    description: 'Guarnición.',
+    image: papaFritaImg,
+    images: [papaFritaImg],
+    tags: ['Guarniciones'],
+    ingredients: ['Papa'],
+    allergens: undefined
+  },
+
+
 ]
 
 export default function Menu() {
