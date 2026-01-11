@@ -42,6 +42,10 @@ import papaDoradaImg from '../assets/images/dishes/papa_dorada.png'
 import lecheDeTigreImg from '../assets/images/dishes/leche_tigre.png'
 import risottoVeganoImg from '../assets/images/dishes/risotto_vegano.png'
 import SaltadoVeganoImg from '../assets/images/dishes/saltado_vegano.png'
+import pulpoParrilla1Img from '../assets/images/dishes/pulpo_parrilla1.png'
+import pulpoParrilla2Img from '../assets/images/dishes/pulpo_parrilla2.png'
+import duoImg from '../assets/images/dishes/duo.png'
+import trioImg from '../assets/images/dishes/trio.png'
 const dishes: Dish[] = [
   // ======================
   // 🐟 CARTA CEVICHERA
@@ -318,8 +322,8 @@ const dishes: Dish[] = [
     name: 'Pulpo a la Parrilla Mi primer puerto',
     price: '$12.000',
     description: 'Pulpo tierno de las costas ariqueñas, bañado en salsa anticuchera y chimichurri, acompañado de papas rústicas.',
-    image: pulpoImg,
-    images: [pulpoImg],
+    image: pulpoParrilla1Img,
+    images: [pulpoParrilla1Img, pulpoParrilla2Img],
     tags: ['Especialidades'],
     ingredients: ['Pulpo', 'Ají panca', 'Chimichurri', 'Papas rústicas'],
     allergens: ['Mariscos']
@@ -497,7 +501,61 @@ const dishes: Dish[] = [
   // ======================
   // 🍲 SUDADOS
   // ======================
-  
+    // ======================
+  // 🤝 COMBOS DÚO & TRÍO
+  // ======================
+  {
+    id: '40',
+    name: 'Dúo Personal',
+    price: '$10.000',
+    description: 'Elige 2 platos a elección.',
+    image: duoImg,
+    images: [duoImg],
+    tags: ['Dúo'],
+    ingredients: [
+      'Elige 2 platos:',
+      'Ceviche de pescado',
+      'Arroz con mariscos',
+      'Chicharrón',
+      'Chaufa de camarón'
+    ],
+    allergens: ['Pescado', 'Mariscos']
+  },
+  {
+    id: '41',
+    name: 'Dúo para Dos Personas',
+    price: '$14.990',
+    description: 'Ideal para compartir. Elige 2 platos.',
+    image: duoImg,
+    images: [duoImg],
+    tags: ['Dúo'],
+    ingredients: [
+      'Elige 2 platos:',
+      'Ceviche de pescado',
+      'Arroz con mariscos',
+      'Chicharrón',
+      'Chaufa de camarón'
+    ],
+    allergens: ['Pescado', 'Mariscos']
+  },
+  {
+    id: '42',
+    name: 'Trío para Tres Personas',
+    price: '$22.990',
+    description: 'Perfecto para compartir. Elige 3 platos.',
+    image: trioImg,
+    images: [trioImg],
+    tags: ['Trío'],
+    ingredients: [
+      'Elige 3 platos:',
+      'Ceviche de pescado',
+      'Arroz con mariscos',
+      'Chicharrón',
+      'Chaufa de camarón'
+    ],
+    allergens: ['Pescado', 'Mariscos']
+  },
+
   // ======================
   // 🍟 GUARNICIONES
   // ======================
@@ -546,7 +604,7 @@ const dishes: Dish[] = [
     allergens: undefined
   },
     {
-    id: '40',
+    id: '50',
     name: 'Papa Dorada',
     price: '$1.500',
     description: 'Guarnición.',
@@ -557,7 +615,7 @@ const dishes: Dish[] = [
     allergens: undefined
   },
   {
-    id: '41',
+    id: '51',
     name: 'Arroz blanco',
     price: '$1.500',
     description: 'Guarnición.',
@@ -568,7 +626,7 @@ const dishes: Dish[] = [
     allergens: undefined
   },
   {
-    id: '42',
+    id: '52',
     name: 'Papa Frita',
     price: '$1.500',
     description: 'Guarnición.',

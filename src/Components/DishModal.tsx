@@ -10,6 +10,24 @@ interface Props {
 export default function DishModal({ dish, onClose }: Props) {
   const { addToCart } = useCart()
 
+  // =========================
+  // Tipo de plato
+  // =========================
+  const isCombo =
+    dish.tags?.includes("Dúo") || dish.tags?.includes("Trío")
+
+  const isSide =
+    dish.tags?.includes("Guarniciones")
+
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
+
+  const comboOptions = dish.ingredients?.filter(
+    i => !i.toLowerCase().includes("elige")
+  )
+
+  // =========================
+  // Imágenes
+  // =========================
   const images =
     dish.images && dish.images.length > 0
       ? dish.images
@@ -17,6 +35,9 @@ export default function DishModal({ dish, onClose }: Props) {
       ? [dish.image]
       : []
 
+  // =========================
+  // Carousel
+  // =========================
   const [index, setIndex] = useState(0)
   const [offset, setOffset] = useState(0)
   const startX = useRef(0)
@@ -25,7 +46,6 @@ export default function DishModal({ dish, onClose }: Props) {
   const width =
     typeof window !== "undefined" ? window.innerWidth : 360
 
-  // --- Swipe logic ---
   const start = (x: number) => {
     dragging.current = true
     startX.current = x
@@ -48,6 +68,9 @@ export default function DishModal({ dish, onClose }: Props) {
     setOffset(0)
   }
 
+  // =========================
+  // Render
+  // =========================
   return (
     <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-xl rounded-2xl overflow-hidden relative">
@@ -87,7 +110,6 @@ export default function DishModal({ dish, onClose }: Props) {
             ))}
           </div>
 
-          {/* Dots */}
           {images.length > 1 && (
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
               {images.map((_, i) => (
@@ -104,20 +126,29 @@ export default function DishModal({ dish, onClose }: Props) {
 
         {/* Content */}
         <div className="p-6">
-          <h3 className="text-2xl font-semibold">
-            {dish.name}
-          </h3>
+          <h3 className="text-2xl font-semibold">{dish.name}</h3>
 
-          <p className="text-gray-600 mt-2">
-            {dish.description}
-          </p>
+          <p className="text-gray-600 mt-2">{dish.description}</p>
 
           <div className="mt-4 text-xl font-semibold text-sky-700">
             {dish.price}
           </div>
 
-          {/* Ingredients */}
-          {dish.ingredients && dish.ingredients.length > 0 && (
+          {/* Badges */}
+          {isSide && (
+            <div className="mt-2 inline-block bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">
+              🍟 Guarnición
+            </div>
+          )}
+
+          {isCombo && (
+            <div className="mt-2 inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-medium">
+              🤝 Combo {dish.tags?.includes("Trío") ? "Trío" : "Dúo"}
+            </div>
+          )}
+
+          {/* Ingredientes normales */}
+          {!isCombo && dish.ingredients && dish.ingredients.length > 0 && (
             <div className="mt-5">
               <h4 className="text-sm font-semibold mb-2">
                 Ingredientes
@@ -130,6 +161,50 @@ export default function DishModal({ dish, onClose }: Props) {
             </div>
           )}
 
+          {/* Selector combo */}
+          {isCombo && comboOptions && (
+            <div className="mt-5">
+              <h4 className="text-sm font-semibold mb-3">
+                {dish.tags?.includes("Trío")
+                  ? "Elige 3 platos"
+                  : "Elige 2 platos"}
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {comboOptions.map(option => {
+                  const selected = selectedOptions.includes(option)
+                  const max =
+                    dish.tags?.includes("Trío") ? 3 : 2
+
+                  return (
+                    <button
+                      key={option}
+                      onClick={() => {
+                        setSelectedOptions(prev => {
+                          if (selected)
+                            return prev.filter(o => o !== option)
+                          if (prev.length >= max) return prev
+                          return [...prev, option]
+                        })
+                      }}
+                      className={`border rounded-lg px-3 py-2 text-sm text-left transition ${
+                        selected
+                          ? "bg-sky-700 text-white border-sky-700"
+                          : "bg-white hover:bg-sky-50"
+                      }`}
+                    >
+                      {selected ? "✓ " : ""}{option}
+                    </button>
+                  )
+                })}
+              </div>
+
+              <p className="mt-2 text-xs text-gray-500">
+                Seleccionados: {selectedOptions.length}
+              </p>
+            </div>
+          )}
+
           {/* Allergens */}
           {dish.allergens && dish.allergens.length > 0 && (
             <div className="mt-4 text-xs text-red-600">
@@ -137,32 +212,44 @@ export default function DishModal({ dish, onClose }: Props) {
             </div>
           )}
 
-          {/* Tags */}
-          <div className="mt-4 flex flex-wrap gap-2">
-            {dish.tags?.map(t => (
-              <span
-                key={t}
-                className="bg-sky-100 text-sky-700 px-3 py-1 rounded-full text-xs"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
           {/* Add to cart */}
           <button
+            disabled={
+              isCombo &&
+              selectedOptions.length !==
+                (dish.tags?.includes("Trío") ? 3 : 2)
+            }
             onClick={() => {
+              if (isCombo) {
+                const required =
+                  dish.tags?.includes("Trío") ? 3 : 2
+                if (selectedOptions.length !== required) return
+              }
+
               addToCart({
                 id: Number(dish.id),
                 name: dish.name,
-                price: Number(dish.price.replace(/\./g, "").replace("$", "")),
-                quantity: 1
+                price: Number(
+                  dish.price.replace(/\./g, "").replace("$", "")
+                ),
+                quantity: 1,
               })
+
               onClose()
             }}
-            className="mt-6 w-full bg-sky-700 text-white py-3 rounded-lg hover:bg-sky-800 transition"
+            className={`mt-6 w-full py-3 rounded-lg transition ${
+              isSide
+                ? "bg-amber-600 hover:bg-amber-700 text-white"
+                : isCombo
+                ? "bg-purple-700 hover:bg-purple-800 text-white disabled:opacity-40"
+                : "bg-sky-700 hover:bg-sky-800 text-white"
+            }`}
           >
-            🛒 Agregar al pedido
+            {isSide
+              ? "➕ Agregar guarnición"
+              : isCombo
+              ? "🧩 Agregar combo"
+              : "🛒 Agregar al pedido"}
           </button>
         </div>
       </div>
