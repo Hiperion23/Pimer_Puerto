@@ -10,6 +10,7 @@ import lomoImg from '../assets/images/dishes/lomo.png'
 import chaufaImg from '../assets/images/dishes/chaufa.png'
 import arrozImg from '../assets/images/dishes/arroz.png'
 import chicharronImg from '../assets/images/dishes/chicharron.png'
+import ChicharronLechonImg from '../assets/images/dishes/ChicharronLechon.png'
 import pulpoImg from '../assets/images/dishes/pulpo.png'
 import anticuchoImg from '../assets/images/dishes/anticucho.png'
 import pastaImg from '../assets/images/dishes/pasta.png'
@@ -46,6 +47,7 @@ import pulpoParrilla1Img from '../assets/images/dishes/pulpo_parrilla1.png'
 import pulpoParrilla2Img from '../assets/images/dishes/pulpo_parrilla2.png'
 import duoImg from '../assets/images/dishes/duo.png'
 import trioImg from '../assets/images/dishes/trio.png'
+
 const dishes: Dish[] = [
   // ======================
   // 🐟 CARTA CEVICHERA
@@ -274,6 +276,17 @@ const dishes: Dish[] = [
     tags: ['Chicharrones'],
     ingredients: ['Pescado', 'Harina', 'Papas doradas'],
     allergens: ['Pescado']
+  },
+  {
+    id: '43',
+    name: 'Chicharrón de lechón tierno tradicional',
+    price: '$8.000',
+    description: 'Chicharrón de lechón tierno.',
+    image: ChicharronLechonImg,
+    images: [ChicharronLechonImg],
+    tags: ['Chicharrones'],
+    ingredients: ['Sarza Criolla', 'Camote', 'Papas doradas', 'Lechón', 'Canchita'],
+    allergens: undefined
   },
   {
     id: '20',
@@ -516,8 +529,8 @@ const dishes: Dish[] = [
       'Elige 2 platos:',
       'Ceviche de pescado',
       'Arroz con mariscos',
-      'Chicharrón',
-      'Chaufa de camarón'
+      'Chicharrón de pescado',
+      'Chaufa de mariscos'
     ],
     allergens: ['Pescado', 'Mariscos']
   },
@@ -533,8 +546,8 @@ const dishes: Dish[] = [
       'Elige 2 platos:',
       'Ceviche de pescado',
       'Arroz con mariscos',
-      'Chicharrón',
-      'Chaufa de camarón'
+      'Chicharrón de pescado',
+      'Chaufa de mariscos'
     ],
     allergens: ['Pescado', 'Mariscos']
   },
@@ -550,8 +563,8 @@ const dishes: Dish[] = [
       'Elige 3 platos:',
       'Ceviche de pescado',
       'Arroz con mariscos',
-      'Chicharrón',
-      'Chaufa de camarón'
+      'Chicharrón de pescado',
+      'Chaufa de mariscos'
     ],
     allergens: ['Pescado', 'Mariscos']
   },
@@ -642,19 +655,49 @@ const dishes: Dish[] = [
 
 export default function Menu() {
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
+  const [search, setSearch] = useState('')
+
+  const filteredDishes = dishes.filter(d => {
+    const text = search.toLowerCase()
+
+    return (
+      d.name.toLowerCase().includes(text) ||
+      d.description?.toLowerCase().includes(text) ||
+      d.tags?.some(tag => tag.toLowerCase().includes(text)) ||
+      d.ingredients?.some(ing => ing.toLowerCase().includes(text))
+    )
+  })
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-12">
       <h2 className="text-3xl font-semibold mb-2">Nuestra Carta</h2>
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-600 mb-4">
         Tradición peruana con sabor casero.
       </p>
 
+      {/* 🔍 BUSCADOR */}
+      <div className="mb-8">
+        <input
+          type="text"
+          placeholder="Buscar platos, ingredientes o combos..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="w-full md:w-1/2 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        />
+      </div>
+
+      {/* 🧾 LISTA */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {dishes.map(d => (
+        {filteredDishes.map(d => (
           <DishCard key={d.id} dish={d} onClick={() => setSelectedDish(d)} />
         ))}
       </div>
+
+      {filteredDishes.length === 0 && (
+        <p className="text-center text-slate-400 mt-10">
+          No se encontraron platos 😕
+        </p>
+      )}
 
       {selectedDish && (
         <DishModal dish={selectedDish} onClose={() => setSelectedDish(null)} />

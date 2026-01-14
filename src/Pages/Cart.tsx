@@ -21,7 +21,7 @@ export default function Cart() {
     if (cart.length === 0) return
 
     setSending(true)
-    const phone = '56959790676'
+    const phone = '56982955585'
 
     let message = '🍽️ *Nuevo Pedido - Mi Primer Puerto*%0A%0A'
     cart.forEach(item => {
