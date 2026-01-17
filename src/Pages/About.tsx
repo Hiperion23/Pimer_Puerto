@@ -1,5 +1,6 @@
 import { Heart, Users, Award, Sparkles, Target, Eye, ChefHat, Fish, Leaf, Clock } from 'lucide-react'
 import heroVideo from '../assets/videos/hero.mp4'
+import nosotrosVideo from '../assets/videos/nosotro.mp4'
 
 export default function About() {
   return (
@@ -78,7 +79,7 @@ export default function About() {
             <div className="relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <video
-                  src={heroVideo}
+                  src={nosotrosVideo}
                   autoPlay
                   loop
                   muted
@@ -195,11 +196,14 @@ export default function About() {
             
             {/* Imagen del equipo */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
-              <img
-                src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800"
-                alt="Equipo Mi Primer Puerto"
-                className="w-full h-[500px] object-cover"
-              />
+                <video
+                  src={heroVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
               <div className="absolute inset-0 bg-linear-to-t from-blue-900/80 via-transparent to-transparent"></div>
             </div>
 
