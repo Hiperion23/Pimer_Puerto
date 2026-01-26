@@ -47,6 +47,8 @@ import pulpoParrilla1Img from '../assets/images/dishes/pulpo_parrilla1.png'
 import pulpoParrilla2Img from '../assets/images/dishes/pulpo_parrilla2.png'
 import duoImg from '../assets/images/dishes/duo.png'
 import trioImg from '../assets/images/dishes/trio.png'
+import fettu_huancainaImg from '../assets/images/dishes/fettu_huanca.png'
+import chaufa_camaronImg from '../assets/images/dishes/chaufa_camaron.png'
 
 const dishes: Dish[] = [
   // ======================
@@ -171,7 +173,7 @@ const dishes: Dish[] = [
     allergens: ['Pescado']
   },
   {
-    id: '11',
+    id: '50',
     name: 'Saltado Mar y Tierra',
     price: '$10.000',
     description: 'Carne, camarón y pulpo.',
@@ -179,8 +181,20 @@ const dishes: Dish[] = [
     images: [marytierraImg],
     tags: ['Lomo Saltado'],
     ingredients: ['Carne', 'Pulpo', 'Camarón', 'Papas fritas'],
+    allergens: undefined
+  },
+    {
+    id: '11',
+    name: 'Lomo saltado con Fettucini',
+    price: '$10.000',
+    description: 'Lomo saltado servido con fettucini Huancaina.',
+    image: fettu_huancainaImg,
+    images: [fettu_huancainaImg],
+    tags: ['Lomo Saltado'],
+    ingredients: ['Carne', 'Cebolla', 'Tomate', 'Fetuccini'],
     allergens: ['Mariscos']
   },
+
 
   // ======================
   // 🍚 CHAUFAS Y ARROCES
@@ -241,9 +255,20 @@ const dishes: Dish[] = [
     allergens: undefined
   },
   {
+    id: '51',
+    name: 'Chaufa de Camarón',
+    price: '$9.000',
+    description: 'Chaufa con camarón.',
+    image: chaufa_camaronImg,
+    images: [chaufa_camaronImg],
+    tags: ['Chaufas'],
+    ingredients: ['Camarón', 'Arroz', 'Huevo'],
+    allergens: ['Mariscos']
+  },
+  {
     id: '17',
     name: 'Arroz con Mariscos',
-    price: '$9.000',
+    price: '$10.000',
     description: 'Arroz cremoso marino.',
     image: arrozImg,
     images: [arrozImg],
