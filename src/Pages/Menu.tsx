@@ -154,9 +154,9 @@ const dishes: Dish[] = [
   },
   {
     id: '8',
-    name: 'Torticas de Choclo Acevichadas',
+    name: 'Tortitas de Choclo Acevichadas',
     price: '$7.000',
-    description: 'Torticas de choclo tradicionales.',
+    description: 'Tortitas de choclo tradicionales.',
     image: torticasImg,
     images: [torticas2Img],
     tags: ['Entradas'],
