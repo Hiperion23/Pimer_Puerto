@@ -312,8 +312,7 @@ export default function Contact() {
           
           <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-100">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.7!2d-70.3!3d-18.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMwJzAwLjAiUyA3MMKwMTgnMDAuMCJX!5e0!3m2!1ses!2scl!4v1234567890"
-              width="100%"
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d347.0!2d-70.2965693!3d-18.486128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915aa9cecd4c73b9%3A0x54eb9da3e89f7691!2sTucapel%201192%2C%20Arica%2C%20Arica%20y%20Parinacota!5e0!3m2!1ses!2scl!4v1714260000"              width="100%"
               height="450"
               style={{ border: 0 }}
               allowFullScreen
