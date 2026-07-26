@@ -134,11 +134,11 @@ const dishes: Dish[] = [
     id: '6',
     name: 'Causa Limeña',
     price: '$8.000',
-    description: 'Causa limeña tradicional.',
+    description: 'Pollo, Ceviche, Pulpo al olivo, Camarrón.',
     image: causaImg,
     images: [causaImg],
     tags: ['Entradas'],
-    ingredients: [],
+    ingredients: ['Pollo', 'Ají amarillo', 'Papa', 'Mayonesa', 'Limón'],
     allergens: undefined,
   },
   {
@@ -174,7 +174,7 @@ const dishes: Dish[] = [
     ingredients: ['Choritos', 'Cebolla', 'Tomate', 'Limón'],
     allergens: ['Mariscos'],
   },
- */  {
+ */  /* {
     id: '10',
     name: 'Pulpo a la Chalaca',
     price: '$7.000',
@@ -184,7 +184,7 @@ const dishes: Dish[] = [
     tags: ['Entradas'],
     ingredients: ['Pulpo', 'Cebolla', 'Tomate', 'Limón'],
     allergens: ['Mariscos'],
-  },
+  }, */
 /*   {
     id: '11',
     name: 'Empanadita Ají de Gallina',
@@ -317,7 +317,7 @@ const dishes: Dish[] = [
   {
     id: '22',
     name: 'Lomo saltado con Fettucini',
-    price: '$10.000',
+    price: '$11.000',
     description: 'Lomo saltado servido con fettucini Huancaina.',
     image: fettu_huancainaImg,
     images: [fettu_huancainaImg],
@@ -332,7 +332,7 @@ const dishes: Dish[] = [
   {
     id: '23',
     name: 'Chaufa de Pollo',
-    price: '$7.990',
+    price: '$8.500',
     description: 'Arroz chaufa tradicional.',
     image: chaufaPolloImg,
     images: [chaufaPolloImg],
@@ -343,7 +343,7 @@ const dishes: Dish[] = [
   {
     id: '24',
     name: 'Chaufa de Chicharrón de Lechón',
-    price: '$8.000',
+    price: '$8.990',
     description: 'Chaufa con cerdo crocante.',
     image: chaufaLechonImg,
     images: [chaufaLechonImg],
@@ -354,7 +354,7 @@ const dishes: Dish[] = [
   {
     id: '25',
     name: 'Chaufa de Mariscos',
-    price: '$10.000',
+    price: '$11.000',
     description: 'Chaufa marino.',
     image: chaufaImg,
     images: [chaufaImg],
@@ -365,7 +365,7 @@ const dishes: Dish[] = [
   {
     id: '26',
     name: 'Chaufa de Pulpo',
-    price: '$10.000',
+    price: '$11.000',
     description: 'Pulpo salteado con arroz.',
     image: chaufaImg,
     images: [chaufaImg],
@@ -376,7 +376,7 @@ const dishes: Dish[] = [
   {
     id: '27',
     name: 'Chaufa de Carne',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Carne salteada al wok.',
     image: chaufaCarneImg,
     images: [chaufaCarneImg],
@@ -387,7 +387,7 @@ const dishes: Dish[] = [
   {
     id: '28',
     name: 'Chaufa de Camarón',
-    price: '$10.000',
+    price: '$11.000',
     description: 'Chaufa con camarón.',
     image: chaufa_camaronImg,
     images: [chaufa_camaronImg],
@@ -417,7 +417,7 @@ const dishes: Dish[] = [
   {
     id: '30',
     name: 'Chicharrón de Camarón',
-    price: '$10.000',
+    price: '$11.000',
     description: 'Camarón frito crocante.',
     image: chicharonMixtoImg,
     images: [chicharonMixtoImg],
@@ -428,7 +428,7 @@ const dishes: Dish[] = [
   {
     id: '31',
     name: 'Chicharrón de Pulpo',
-    price: '$10.000',
+    price: '$11.000',
     description: 'Pulpo frito crocante.',
     image: chicharonMixtoImg,
     images: [chicharonMixtoImg],
@@ -439,7 +439,7 @@ const dishes: Dish[] = [
   {
     id: '32',
     name: 'Chicharrón de Pollo',
-    price: '$7.990',
+    price: '$8.500',
     description: 'Pollo crocante.',
     image: chicharonPolloImg,
     images: [chicharonPolloImg],
@@ -450,7 +450,7 @@ const dishes: Dish[] = [
   {
     id: '33',
     name: 'Chicharrón de Pescado',
-    price: '$8.990',
+    price: '$9.000',
     description: 'Pescado frito.',
     image: chicharronImg,
     images: [chicharronImg],
@@ -461,7 +461,7 @@ const dishes: Dish[] = [
   {
     id: '34',
     name: 'Chicharrón de lechón tierno tradicional',
-    price: '$8.990',
+    price: '$10.000',
     description: 'Chicharrón de lechón tierno.',
     image: lechonImg,
     images: [ChicharronLechonImg, lechonImg],
@@ -472,7 +472,7 @@ const dishes: Dish[] = [
   {
     id: '35',
     name: 'Chicharrón Mixto Marino',
-    price: '$10.990',
+    price: '$12.000',
     description: 'Mariscos fritos.',
     image: chicharonMixtoImg,
     images: [chicharonMixtoImg],
@@ -487,7 +487,7 @@ const dishes: Dish[] = [
   {
     id: '36',
     name: 'Sudado de Pescado Entero',
-    price: '$10.000',
+    price: '$10.990',
     description: 'Sudado tradicional.',
     image: sudadoImg,
     images: [sudadoImg],
@@ -498,7 +498,7 @@ const dishes: Dish[] = [
   {
     id: '37',
     name: 'Sudado de Pescado con Mariscos',
-    price: '$12.990',
+    price: '$13.990',
     description: 'Sudado con mariscos.',
     image: sudadoImg,
     images: [sudadoImg],
@@ -513,7 +513,7 @@ const dishes: Dish[] = [
   {
     id: '38',
     name: 'Pulpo a la Parrilla Mi primer puerto',
-    price: '$12.990',
+    price: '$13.990',
     description: 'Pulpo tierno de las costas ariqueñas, bañado en salsa anticuchera y chimichurri, acompañado de papas rústicas.',
     image: pulpoParrilla1Img,
     images: [pulpoParrilla1Img, pulpoParrilla2Img],
@@ -524,7 +524,7 @@ const dishes: Dish[] = [
   {
     id: '39',
     name: 'Anticucho de Corazón',
-    price: '$7.000',
+    price: '$8.000',
     description: 'Anticucho peruano tradicional.',
     image: anticuchoImg,
     images: [anticuchoImg],
@@ -535,7 +535,7 @@ const dishes: Dish[] = [
   {
     id: '40',
     name: 'Tallarín Saltado de Carne',
-    price: '$9.000',
+    price: '$10.000',
     description: 'Fideos salteados al wok.',
     image: tallarinSaltadoImg,
     images: [tallarinSaltadoImg],
@@ -561,7 +561,7 @@ const dishes: Dish[] = [
   {
     id: '42',
     name: 'Fetuccini Fruto del Mar',
-    price: '$10.990',
+    price: '$12.990',
     description: 'Pasta en salsa americana con mariscos.',
     image: pastaImg,
     images: [pastaImg],
@@ -576,7 +576,7 @@ const dishes: Dish[] = [
   {
     id: '43',
     name: 'Risotto de Camarones',
-    price: '$10.000',
+    price: '$11.000',
     description: 'Risotto cremoso con camarones.',
     image: risoto_camaronImg,
     images: [risoto_camaronImg],
@@ -587,7 +587,7 @@ const dishes: Dish[] = [
   {
     id: '44',
     name: 'Risotto Fruto del Mar',
-    price: '$10.990',
+    price: '$12.000',
     description: 'Risotto marino cremoso.',
     image: risoto_camaronImg,
     images: [risoto_camaronImg],
@@ -628,7 +628,7 @@ const dishes: Dish[] = [
   {
     id: '47',
     name: 'Costillar al Horno BBQ',
-    price: '$10.000',
+    price: '$12.000',
     description: 'Costillar al horno con salsa BBQ.',
     image: costillar1Img,
     images: [costillar1Img, costillar2Img],
@@ -639,7 +639,7 @@ const dishes: Dish[] = [
   {
     id: '48',
     name: 'Pollo Broaster',
-    price: '$8.000',
+    price: '$9.000',
     description: 'Pollo crujiente acompañado a elección.',
     image: polloChaufaImg,
     images: [polloChaufaImg, polloPapaImg],
@@ -686,7 +686,7 @@ const dishes: Dish[] = [
   {
     id: '51',
     name: 'Dúo para Dos Personas',
-    price: '$15.990',
+    price: '$17.900',
     description: 'Ideal para compartir. Elige 2 platos.',
     image: duoImg,
     images: [duoImg],
@@ -707,7 +707,7 @@ const dishes: Dish[] = [
   {
     id: '52',
     name: 'Trío para Tres Personas',
-    price: '$24.990',
+    price: '$25.990',
     description: 'Perfecto para compartir. Elige 3 platos.',
     image: trioImg,
     images: [trioImg],
@@ -728,7 +728,7 @@ const dishes: Dish[] = [
   {
     id: '53',
     name: 'Papa Rústica',
-    price: '$2.500',
+    price: '$3.000',
     description: 'Guarnición.',
     image: papaRusticaImg,
     images: [papaRusticaImg],
@@ -739,7 +739,7 @@ const dishes: Dish[] = [
   {
     id: '54',
     name: 'Arroz Chaufa',
-    price: '$3.000',
+    price: '$3.500',
     description: 'Guarnición.',
     image: arozChaufaImg,
     images: [arozChaufaImg],
@@ -750,7 +750,7 @@ const dishes: Dish[] = [
   {
     id: '55',
     name: 'Chifle de Camote',
-    price: '$2.500',
+    price: '$3.000',
     description: 'Guarnición.',
     image: camoteImg,
     images: [camoteImg],
@@ -761,7 +761,7 @@ const dishes: Dish[] = [
   {
     id: '56',
     name: 'Canchita',
-    price: '$2.000',
+    price: '$3.000',
     description: 'Guarnición.',
     image: canchaImg,
     images: [canchaImg],
@@ -772,7 +772,7 @@ const dishes: Dish[] = [
   {
     id: '57',
     name: 'Papa Dorada',
-    price: '$2.500',
+    price: '$3.000',
     description: 'Guarnición.',
     image: papaDoradaImg,
     images: [papaDoradaImg],
@@ -783,7 +783,7 @@ const dishes: Dish[] = [
   {
     id: '58',
     name: 'Arroz blanco',
-    price: '$2.500',
+    price: '$3.000',
     description: 'Guarnición.',
     image: arrozBlancoImg,
     images: [arrozBlancoImg],
@@ -794,12 +794,203 @@ const dishes: Dish[] = [
   {
     id: '59',
     name: 'Papa Frita',
-    price: '$2.500',
+    price: '$3.500',
     description: 'Guarnición.',
     image: papaFritaImg,
     images: [papaFritaImg],
     tags: ['Guarniciones'],
     ingredients: ['Papa'],
+    allergens: undefined,
+  },
+  {
+    id: '60',
+    name: 'Ensalada Surtida',
+    price: '$3.500',
+    description: 'Ensalada fresca de acompañamiento.',
+    tags: ['Guarniciones'],
+    ingredients: ['Verduras frescas'],
+    allergens: undefined,
+  },
+  {
+    id: '61',
+    name: 'Puré de Papa Natural',
+    price: '$4.000',
+    description: 'Puré de papa casero.',
+    tags: ['Guarniciones'],
+    ingredients: ['Papa', 'Mantequilla', 'Leche'],
+    allergens: ['Lácteos'],
+  },
+  // ======================
+  // 🥤 BEBIDAS
+  // ======================
+  {
+    id: '62',
+    name: 'Inka Cola',
+    price: '$1.800',
+    description: 'Bebida gaseosa.',
+    tags: ['Bebidas'],
+    ingredients: [],
+    allergens: undefined,
+  },
+  {
+    id: '63',
+    name: 'Coca Cola Normal',
+    price: '$1.800',
+    description: 'Bebida gaseosa.',
+    tags: ['Bebidas'],
+    ingredients: [],
+    allergens: undefined,
+  },
+  {
+    id: '64',
+    name: 'Coca Cola Zero',
+    price: '$1.800',
+    description: 'Bebida gaseosa sin azúcar.',
+    tags: ['Bebidas'],
+    ingredients: [],
+    allergens: undefined,
+  },
+  {
+    id: '65',
+    name: 'Agua',
+    price: '$1.500',
+    description: 'Agua mineral.',
+    tags: ['Bebidas'],
+    ingredients: [],
+    allergens: undefined,
+  },
+
+  // ======================
+  // 🍹 JUGOS PERSONAL (VASO)
+  // ======================
+  {
+    id: '66',
+    name: 'Jugo Personal de Frutilla',
+    price: '$2.500',
+    description: 'Jugo natural en vaso. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Frutilla'],
+    allergens: undefined,
+  },
+  {
+    id: '67',
+    name: 'Jugo Personal de Guayaba',
+    price: '$2.500',
+    description: 'Jugo natural en vaso. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Guayaba'],
+    allergens: undefined,
+  },
+  {
+    id: '68',
+    name: 'Jugo Personal de Melón Tuna',
+    price: '$2.500',
+    description: 'Jugo natural en vaso. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Melón', 'Tuna'],
+    allergens: undefined,
+  },
+  {
+    id: '69',
+    name: 'Jugo Personal de Melón Calameño',
+    price: '$2.500',
+    description: 'Jugo natural en vaso. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Melón calameño'],
+    allergens: undefined,
+  },
+  {
+    id: '70',
+    name: 'Limonada Tradicional (Personal)',
+    price: '$2.500',
+    description: 'Jugo natural en vaso. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Limón'],
+    allergens: undefined,
+  },
+  {
+    id: '71',
+    name: 'Jugo Personal de Mango',
+    price: '$2.500',
+    description: 'Jugo natural en vaso. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Mango'],
+    allergens: undefined,
+  },
+  {
+    id: '72',
+    name: 'Chicha Morada (Personal)',
+    price: '$2.500',
+    description: 'Jugo natural en vaso. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Maíz morado'],
+    allergens: undefined,
+  },
+
+  // ======================
+  // 🍹 JUGOS JARRA (1 LITRO)
+  // ======================
+  {
+    id: '73',
+    name: 'Jugo Jarra de Frutilla',
+    price: '$4.500',
+    description: 'Jugo natural 1 litro. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Frutilla'],
+    allergens: undefined,
+  },
+  {
+    id: '74',
+    name: 'Jugo Jarra de Guayaba',
+    price: '$4.500',
+    description: 'Jugo natural 1 litro. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Guayaba'],
+    allergens: undefined,
+  },
+  {
+    id: '75',
+    name: 'Jugo Jarra de Melón Tuna',
+    price: '$4.500',
+    description: 'Jugo natural 1 litro. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Melón', 'Tuna'],
+    allergens: undefined,
+  },
+  {
+    id: '76',
+    name: 'Jugo Jarra de Melón Calameño',
+    price: '$4.500',
+    description: 'Jugo natural 1 litro. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Melón calameño'],
+    allergens: undefined,
+  },
+  {
+    id: '77',
+    name: 'Limonada Tradicional (Jarra)',
+    price: '$4.500',
+    description: 'Jugo natural 1 litro. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Limón'],
+    allergens: undefined,
+  },
+  {
+    id: '78',
+    name: 'Jugo Jarra de Mango',
+    price: '$4.500',
+    description: 'Jugo natural 1 litro. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Mango'],
+    allergens: undefined,
+  },
+  {
+    id: '79',
+    name: 'Chicha Morada (Jarra)',
+    price: '$4.500',
+    description: 'Jugo natural 1 litro. Adicional hierbabuena o jengibre +$500.',
+    tags: ['Bebidas', 'Jugos'],
+    ingredients: ['Maíz morado'],
     allergens: undefined,
   },
 

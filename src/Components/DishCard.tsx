@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
 export interface Dish {
-  allergens: any
+  allergens: string[] | undefined
   id: string
   name: string
   price: string
@@ -16,6 +15,25 @@ export interface Dish {
 interface Props {
   dish: Dish
   onClick: (dish: Dish) => void
+}
+
+// Ícono/emoji según la categoría, para cuando no hay foto todavía
+const getPlaceholderIcon = (tags?: string[]) => {
+  const tag = tags?.[0] ?? ''
+  if (tag.includes('Bebida')) return '🥤'
+  if (tag.includes('Jugo')) return '🧃'
+  if (tag.includes('Cevich')) return '🐟'
+  if (tag.includes('Picante')) return '🌶️'
+  if (tag.includes('Chaufa') || tag.includes('Arroz')) return '🍚'
+  if (tag.includes('Chicharr')) return '🍗'
+  if (tag.includes('Sudado')) return '🍲'
+  if (tag.includes('Carne')) return '🥩'
+  if (tag.includes('Pescado')) return '🐠'
+  if (tag.includes('Pasta') || tag.includes('Risotto')) return '🍝'
+  if (tag.includes('Vegetarian')) return '🥦'
+  if (tag.includes('Guarnici')) return '🍟'
+  if (tag.includes('Entrada')) return '🥗'
+  return '🍽️'
 }
 
 const DishCard: React.FC<Props> = ({ dish, onClick }) => {
@@ -32,8 +50,9 @@ const DishCard: React.FC<Props> = ({ dish, onClick }) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="h-full flex items-center justify-center text-gray-400">
-            Imagen
+          <div className="h-full w-full flex flex-col items-center justify-center gap-1 bg-linear-to-br from-slate-100 to-slate-200 text-slate-400">
+            <span className="text-4xl">{getPlaceholderIcon(dish.tags)}</span>
+            <span className="text-xs">Foto próximamente</span>
           </div>
         )}
       </div>
