@@ -14,7 +14,6 @@ export default function Contact() {
   })
 
   const handleSubmit = () => {
-    // Validación básica
     if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.time) {
       alert('Por favor completa todos los campos obligatorios')
       return
@@ -42,7 +41,6 @@ export default function Contact() {
 
   return (
     <div className="bg-white">
-      {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
@@ -61,7 +59,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Main Content */}
       <section className="relative py-20 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl"></div>
@@ -69,10 +66,8 @@ export default function Contact() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12">
             
-            {/* INFO CARDS - 2 columnas */}
             <div className="lg:col-span-2 space-y-6">
               
-              {/* Info Principal */}
               <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Información de Contacto</h3>
                 
@@ -134,7 +129,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* WhatsApp CTA */}
               <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl shadow-xl p-8 text-white">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
@@ -160,7 +154,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* FORM - 3 columnas */}
             <div className="lg:col-span-3">
               <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 border border-gray-100">
                 <div className="mb-8">
@@ -300,7 +293,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
