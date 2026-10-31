@@ -16,7 +16,7 @@ const featuredDishes: Dish[] = [
   {
     id: '34',
     name: 'Sudado de Pescado Entero',
-    price: '$8.000',
+    price: '$10.990',
     description: 'Sudado tradicional.',
     image: sudadoImg,
     images: [sudadoImg],
@@ -27,7 +27,7 @@ const featuredDishes: Dish[] = [
   {
     id: '35',
     name: 'Sudado de Pescado con Mariscos',
-    price: '$10.000',
+    price: '$13.990',
     description: 'Sudado con mariscos.',
     image: sudadoImg,
     images: [sudadoImg],
@@ -43,7 +43,7 @@ const featuredDishes: Dish[] = [
   {
     id: '21',
     name: 'Pulpo a la Parrilla Mi primer puerto',
-    price: '$12.000',
+    price: '$13.990',
     description: 'Pulpo tierno de las costas ariqueñas, bañado en salsa anticuchera y chimichurri, acompañado de papas rústicas.',
     image: pulpoImg,
     images: [pulpoImg],
@@ -54,7 +54,7 @@ const featuredDishes: Dish[] = [
   {
     id: '22',
     name: 'Anticucho de Corazón',
-    price: '$6.000',
+    price: '$8.000',
     description: 'Anticucho peruano tradicional.',
     image: anticuchoImg,
     images: [anticuchoImg],
@@ -65,7 +65,7 @@ const featuredDishes: Dish[] = [
   {
     id: '23',
     name: 'Tallarín Saltado de Carne',
-    price: '$8.000',
+    price: '$10.000',
     description: 'Fideos salteados al wok.',
     image: tallarinSaltadoImg,
     images: [tallarinSaltadoImg],
@@ -76,7 +76,7 @@ const featuredDishes: Dish[] = [
   {
     id: '24',
     name: 'Fetuccini al Ajillo con Camarones',
-    price: '$9.000',
+    price: '$11.000',
     description: 'Pasta al ajillo.',
     image: pastaImg,
     images: [pastaImg],
