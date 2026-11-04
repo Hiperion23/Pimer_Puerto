@@ -1,191 +1,294 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ChefHat, Clock, Truck, Star, Award, Heart, ArrowRight, Sparkles } from 'lucide-react'
+import { ChefHat, Clock, Truck, Star, Award, Heart, ArrowRight, Anchor, Compass } from 'lucide-react'
 import Hero from '../Components/Hero'
 import DishCard from '../Components/DishCard'
 import DishModal from '../Components/DishModal'
 import type { Dish } from '../Components/DishCard'
+import { api } from '../api/api'
 
-import pulpoImg from '../assets/images/dishes/pulpo.png'
-import anticuchoImg from '../assets/images/dishes/anticucho.png'
-import tallarinSaltadoImg from '../assets/images/dishes/tallarin_saltado.png'
-import pastaImg from '../assets/images/dishes/pasta.png'
-import sudadoImg from '../assets/images/dishes/sudado_pescado.png'
+const COLORS = {
+  abyss: '#060B14',
+  abyssLight: '#0F2138',
+  biolume: '#2FF3E0',
+  aji: '#FF6B45',
+  foam: '#EAF6F8',
+  muted: '#9FB4C4',
+}
 
-const featuredDishes: Dish[] = [
+function TiltCard({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2
+    setTilt({ x, y })
+  }
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMove}
+      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+      className={className}
+      style={{
+        transformStyle: 'preserve-3d',
+        transition: 'transform 0.2s ease-out',
+        transform: `perspective(800px) rotateY(${tilt.x * 6}deg) rotateX(${-tilt.y * 6}deg) translateY(${
+          tilt.x || tilt.y ? -6 : 0
+        }px)`,
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
+const features = [
   {
-    id: '34',
-    name: 'Sudado de Pescado Entero',
-    price: '$10.990',
-    description: 'Sudado tradicional.',
-    image: sudadoImg,
-    images: [sudadoImg],
-    tags: ['Sudados'],
-    ingredients: ['Pescado entero', 'Cebolla', 'Tomate', 'Cilantro'],
-    allergens: ['Pescado']
+    icon: ChefHat,
+    title: 'Recetas Auténticas',
+    text: 'Platos tradicionales peruanos preparados con técnicas ancestrales y pasión.',
+    accent: COLORS.biolume,
   },
   {
-    id: '35',
-    name: 'Sudado de Pescado con Mariscos',
-    price: '$13.990',
-    description: 'Sudado con mariscos.',
-    image: sudadoImg,
-    images: [sudadoImg],
-    tags: ['Sudados'],
-    ingredients: [
-      'Pescado entero',
-      'Pulpo',
-      'Camarón',
-      'Calamar'
-    ],
-    allergens: ['Pescado', 'Mariscos']
+    icon: Award,
+    title: 'Ingredientes Frescos',
+    text: 'Seleccionamos los mejores productos del mar para garantizar calidad superior.',
+    accent: COLORS.aji,
   },
   {
-    id: '21',
-    name: 'Pulpo a la Parrilla Mi primer puerto',
-    price: '$13.990',
-    description: 'Pulpo tierno de las costas ariqueñas, bañado en salsa anticuchera y chimichurri, acompañado de papas rústicas.',
-    image: pulpoImg,
-    images: [pulpoImg],
-    tags: ['Especialidades'],
-    ingredients: ['Pulpo', 'Ají panca', 'Chimichurri', 'Papas rústicas'],
-    allergens: ['Mariscos']
+    icon: Clock,
+    title: 'Horario Extendido',
+    text: 'Abierto todos los días de 19:00 a 00:00 hrs para que disfrutes cuando quieras.',
+    accent: COLORS.biolume,
   },
   {
-    id: '22',
-    name: 'Anticucho de Corazón',
-    price: '$8.000',
-    description: 'Anticucho peruano tradicional.',
-    image: anticuchoImg,
-    images: [anticuchoImg],
-    tags: ['Especialidades'],
-    ingredients: ['Corazón de res', 'Ají panca', 'Papa', 'Choclo'],
-    allergens: undefined
+    icon: Truck,
+    title: 'Delivery Rápido',
+    text: 'Llevamos nuestros sabores hasta tu hogar con servicio de entrega eficiente.',
+    accent: COLORS.aji,
+  },
+]
+
+const testimonials = [
+  {
+    name: 'María González',
+    role: 'Cliente frecuente',
+    text: '"El mejor ceviche de Arica, sin duda. Los ingredientes son fresquísimos y el sabor es auténtico. ¡Volveré seguro!"',
+    accent: COLORS.biolume,
   },
   {
-    id: '23',
-    name: 'Tallarín Saltado de Carne',
-    price: '$10.000',
-    description: 'Fideos salteados al wok.',
-    image: tallarinSaltadoImg,
-    images: [tallarinSaltadoImg],
-    tags: ['Especialidades'],
-    ingredients: ['Tallarines', 'Carne de res', 'Cebolla', 'Tomate'],
-    allergens: ['Gluten']
+    name: 'Carlos Ramírez',
+    role: 'Visitante',
+    text: '"La atención es excepcional y los platos son de primera. El pulpo a la parrilla es espectacular, muy recomendado."',
+    accent: COLORS.aji,
   },
   {
-    id: '24',
-    name: 'Fetuccini al Ajillo con Camarones',
-    price: '$11.000',
-    description: 'Pasta al ajillo.',
-    image: pastaImg,
-    images: [pastaImg],
-    tags: ['Especialidades'],
-    ingredients: ['Fetuccini', 'Camarones', 'Ajo', 'Aceite de oliva'],
-    allergens: ['Gluten', 'Mariscos']
+    name: 'Andrea Silva',
+    role: 'Cliente satisfecha',
+    text: '"Excelente relación calidad-precio. Los sabores me transportaron a Perú. Definitivamente mi nuevo lugar favorito."',
+    accent: COLORS.biolume,
   },
 ]
 
 export default function Home() {
+  const [featuredDishes, setFeaturedDishes] = useState<Dish[]>([])
+  const [loadingDishes, setLoadingDishes] = useState(true)
+  const [dishesError, setDishesError] = useState<string | null>(null)
   const [selected, setSelected] = useState<Dish | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function fetchFeatured() {
+      setLoadingDishes(true)
+      setDishesError(null)
+      try {
+        const data = await api.get<Dish[]>('/api/platos')
+        if (!cancelled) {
+          const disponibles = data.filter(d => d.disponible !== false)
+          setFeaturedDishes(disponibles.slice(0, 6))
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setDishesError(
+            err instanceof Error ? err.message : 'Error al cargar los platos'
+          )
+        }
+      } finally {
+        if (!cancelled) setLoadingDishes(false)
+      }
+    }
+
+    fetchFeatured()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   return (
     <>
       <Hero />
 
-      {/* Features Section */}
-      <section className="relative py-20 bg-linear-to-br from-blue-50 via-white to-cyan-50 overflow-hidden">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-        
+      <section
+        className="relative py-24 overflow-hidden"
+        style={{ background: `linear-gradient(180deg, ${COLORS.abyss} 0%, #081222 100%)` }}
+      >
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-[0.08] pointer-events-none border" style={{ borderColor: COLORS.biolume }} />
+        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full opacity-[0.08] pointer-events-none border" style={{ borderColor: COLORS.aji }} />
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full mb-4">
-              <Sparkles className="w-4 h-4 text-blue-600" />
-              <span className="text-blue-700 font-medium text-sm">Por qué elegirnos</span>
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-4"
+              style={{ background: 'rgba(47,243,224,0.06)', borderColor: 'rgba(47,243,224,0.25)' }}
+            >
+              <Compass className="w-4 h-4" style={{ color: COLORS.biolume }} />
+              <span
+                className="text-xs tracking-widest"
+                style={{ color: COLORS.biolume, fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                POR QUÉ ELEGIRNOS
+              </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Experiencia <span className="bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Única</span>
+            <h2
+              className="text-4xl md:text-5xl"
+              style={{ fontFamily: "'Chakra Petch', sans-serif", fontWeight: 700, color: COLORS.foam }}
+            >
+              Experiencia{' '}
+              <span
+                style={{
+                  background: `linear-gradient(90deg, ${COLORS.biolume}, ${COLORS.aji})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Única
+              </span>
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="w-14 h-14 bg-linear-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <ChefHat className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Recetas Auténticas</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Platos tradicionales peruanos preparados con técnicas ancestrales y pasión.
-              </p>
-            </div>
-
-            <div className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="w-14 h-14 bg-linear-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Award className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Ingredientes Frescos</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Seleccionamos los mejores productos del mar para garantizar calidad superior.
-              </p>
-            </div>
-
-            <div className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="w-14 h-14 bg-linear-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Clock className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Horario Extendido</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Abierto todos los días de 19:00 a 00:00 hrs para que disfrutes cuando quieras.
-              </p>
-            </div>
-
-            <div className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="w-14 h-14 bg-linear-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Truck className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Delivery Rápido</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Llevamos nuestros sabores hasta tu hogar con servicio de entrega eficiente.
-              </p>
-            </div>
+            {features.map(f => (
+              <TiltCard key={f.title}>
+                <div
+                  className="group p-8 rounded-2xl border h-full transition-colors duration-300"
+                  style={{
+                    background: 'rgba(15,33,56,0.5)',
+                    borderColor: 'rgba(255,255,255,0.08)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+                    style={{ background: `${f.accent}1F`, boxShadow: `0 0 24px ${f.accent}40` }}
+                  >
+                    <f.icon className="w-7 h-7" style={{ color: f.accent }} />
+                  </div>
+                  <h3
+                    className="text-xl mb-3"
+                    style={{ fontFamily: "'Chakra Petch', sans-serif", fontWeight: 600, color: COLORS.foam }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p style={{ color: COLORS.muted, fontFamily: "'Manrope', sans-serif" }} className="leading-relaxed">
+                    {f.text}
+                  </p>
+                </div>
+              </TiltCard>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Dishes Section */}
-      <section className="relative py-20 bg-white overflow-hidden">
-        <div className="absolute top-20 right-0 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute bottom-20 left-0 w-64 h-64 bg-amber-100 rounded-full blur-3xl opacity-50"></div>
+      <section
+        className="relative py-24 overflow-hidden"
+        style={{ background: '#081222' }}
+      >
+        <div className="absolute top-20 right-0 w-72 h-72 rounded-full blur-3xl opacity-10 pointer-events-none" style={{ background: COLORS.biolume }} />
+        <div className="absolute bottom-20 left-0 w-72 h-72 rounded-full blur-3xl opacity-10 pointer-events-none" style={{ background: COLORS.aji }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 rounded-full mb-4">
-              <Star className="w-4 h-4 text-amber-600 fill-amber-600" />
-              <span className="text-amber-700 font-medium text-sm">Más pedidos</span>
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-4"
+              style={{ background: 'rgba(255,107,69,0.06)', borderColor: 'rgba(255,107,69,0.25)' }}
+            >
+              <Star className="w-4 h-4" style={{ color: COLORS.aji }} fill={COLORS.aji} />
+              <span
+                className="text-xs tracking-widest"
+                style={{ color: COLORS.aji, fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                MÁS PEDIDOS
+              </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Platos <span className="bg-linear-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Destacados</span>
+            <h2
+              className="text-4xl md:text-5xl mb-4"
+              style={{ fontFamily: "'Chakra Petch', sans-serif", fontWeight: 700, color: COLORS.foam }}
+            >
+              Platos{' '}
+              <span
+                style={{
+                  background: `linear-gradient(90deg, ${COLORS.aji}, ${COLORS.biolume})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Destacados
+              </span>
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p style={{ color: COLORS.muted, fontFamily: "'Manrope', sans-serif" }} className="text-lg leading-relaxed">
               Descubre nuestras preparaciones más solicitadas, cada una elaborada con ingredientes frescos y auténticos sabores del mar.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredDishes.map(dish => (
-              <DishCard
-                key={dish.id}
-                dish={dish}
-                onClick={setSelected}
-              />
-            ))}
-          </div>
+          {loadingDishes && (
+            <p className="text-center" style={{ color: COLORS.muted, fontFamily: "'JetBrains Mono', monospace" }}>
+              Cargando platos...
+            </p>
+          )}
+
+          {!loadingDishes && dishesError && (
+            <p className="text-center" style={{ color: COLORS.aji }}>
+              No se pudieron cargar los platos: {dishesError}
+            </p>
+          )}
+
+          {!loadingDishes && !dishesError && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {featuredDishes.map(dish => (
+                <TiltCard key={dish.id}>
+                  <div
+                    className="p-0.5 rounded-2xl h-full"
+                    style={{ background: `linear-gradient(135deg, ${COLORS.biolume}66, ${COLORS.aji}66)` }}
+                  >
+                    <DishCard dish={dish} onClick={setSelected} />
+                  </div>
+                </TiltCard>
+              ))}
+            </div>
+          )}
 
           <div className="mt-16 text-center">
             <Link
               to="/menu"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-transform duration-300 hover:scale-105"
+              style={{
+                fontFamily: "'Manrope', sans-serif",
+                color: COLORS.abyss,
+                background: `linear-gradient(90deg, ${COLORS.biolume}, ${COLORS.aji})`,
+                boxShadow: `0 0 30px ${COLORS.biolume}55`,
+              }}
             >
               Ver Carta Completa
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -194,76 +297,97 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+      <section
+        className="relative py-24 overflow-hidden"
+        style={{ background: `linear-gradient(180deg, #081222 0%, ${COLORS.abyss} 100%)` }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none">
+          {[1, 2, 3].map(i => (
+            <div
+              key={i}
+              className="absolute rounded-full border"
+              style={{ width: `${i * 300}px`, height: `${i * 300}px`, borderColor: COLORS.biolume }}
+            />
+          ))}
+        </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-4">
-              <Heart className="w-4 h-4 text-pink-400 fill-pink-400" />
-              <span className="text-white font-medium text-sm">Testimonios</span>
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-4"
+              style={{ background: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.15)' }}
+            >
+              <Heart className="w-4 h-4" style={{ color: COLORS.aji }} fill={COLORS.aji} />
+              <span
+                className="text-xs tracking-widest"
+                style={{ color: COLORS.foam, fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                TESTIMONIOS
+              </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Lo Que Dicen Nuestros <span className="bg-linear-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Clientes</span>
+            <h2
+              className="text-4xl md:text-5xl"
+              style={{ fontFamily: "'Chakra Petch', sans-serif", fontWeight: 700, color: COLORS.foam }}
+            >
+              Lo Que Dicen Nuestros{' '}
+              <span
+                style={{
+                  background: `linear-gradient(90deg, ${COLORS.biolume}, ${COLORS.aji})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Clientes
+              </span>
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300">
-              <div className="flex text-amber-400 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-5 h-5 fill-current" />
-                ))}
-              </div>
-              <p className="text-blue-100 mb-6 leading-relaxed">
-                "El mejor ceviche de Arica, sin duda. Los ingredientes son fresquísimos y el sabor es auténtico. ¡Volveré seguro!"
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-linear-to-br from-blue-400 to-cyan-300"></div>
-                <div>
-                  <p className="font-semibold text-white">María González</p>
-                  <p className="text-sm text-blue-300">Cliente frecuente</p>
+            {testimonials.map(t => (
+              <TiltCard key={t.name}>
+                <div
+                  className="p-8 rounded-2xl border h-full"
+                  style={{
+                    background: 'rgba(15,33,56,0.5)',
+                    borderColor: `${t.accent}30`,
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  <div className="flex gap-1 mb-4">
+                    {[1, 2, 3, 4, 5].map(star => (
+                      <Star key={star} className="w-5 h-5 fill-current" style={{ color: COLORS.aji }} />
+                    ))}
+                  </div>
+                  <p
+                    className="mb-6 leading-relaxed"
+                    style={{ color: COLORS.muted, fontFamily: "'Manrope', sans-serif" }}
+                  >
+                    {t.text}
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-12 h-12 rounded-full"
+                      style={{ background: `linear-gradient(135deg, ${t.accent}, ${COLORS.abyssLight})` }}
+                    />
+                    <div>
+                      <p style={{ color: COLORS.foam, fontFamily: "'Manrope', sans-serif", fontWeight: 600 }}>
+                        {t.name}
+                      </p>
+                      <p className="text-sm" style={{ color: t.accent, fontFamily: "'JetBrains Mono', monospace" }}>
+                        {t.role}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </TiltCard>
+            ))}
+          </div>
 
-            <div className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300">
-              <div className="flex text-amber-400 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-5 h-5 fill-current" />
-                ))}
-              </div>
-              <p className="text-blue-100 mb-6 leading-relaxed">
-                "La atención es excepcional y los platos son de primera. El pulpo a la parrilla es espectacular, muy recomendado."
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-linear-to-br from-amber-400 to-orange-300"></div>
-                <div>
-                  <p className="font-semibold text-white">Carlos Ramírez</p>
-                  <p className="text-sm text-blue-300">Visitante</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300">
-              <div className="flex text-amber-400 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-5 h-5 fill-current" />
-                ))}
-              </div>
-              <p className="text-blue-100 mb-6 leading-relaxed">
-                "Excelente relación calidad-precio. Los sabores me transportaron a Perú. Definitivamente mi nuevo lugar favorito."
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-linear-to-br from-purple-400 to-pink-300"></div>
-                <div>
-                  <p className="font-semibold text-white">Andrea Silva</p>
-                  <p className="text-sm text-blue-300">Cliente satisfecha</p>
-                </div>
-              </div>
-            </div>
+          <div className="mt-16 flex items-center justify-center gap-2 opacity-60">
+            <Anchor className="w-4 h-4" style={{ color: COLORS.biolume }} />
+            <span style={{ color: COLORS.muted, fontFamily: "'JetBrains Mono', monospace" }} className="text-xs tracking-widest">
+              MI PRIMER PUERTO · ARICA, CHILE
+            </span>
           </div>
         </div>
       </section>

@@ -1,10 +1,11 @@
 import React from 'react'
 
 export interface Dish {
+  disponible: boolean
   allergens: string[] | undefined
   id: string
   name: string
-  price: string
+  price: number
   description?: string
   image?: string
   images?: string[]
@@ -17,7 +18,6 @@ interface Props {
   onClick: (dish: Dish) => void
 }
 
-// Ícono/emoji según la categoría, para cuando no hay foto todavía
 const getPlaceholderIcon = (tags?: string[]) => {
   const tag = tags?.[0] ?? ''
   if (tag.includes('Bebida')) return '🥤'
@@ -62,7 +62,7 @@ const DishCard: React.FC<Props> = ({ dish, onClick }) => {
         <p className="text-sm text-gray-500 mt-1">{dish.description}</p>
 
         <div className="mt-3 flex items-center justify-between">
-          <div className="text-sky-700 font-semibold">{dish.price}</div>
+          <div className="text-sky-700 font-semibold">${dish.price.toLocaleString('es-CL')}</div>
           <span className="text-sm text-gray-400">Ver más</span>
         </div>
       </div>

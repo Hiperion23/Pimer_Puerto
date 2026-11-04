@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react"
 
 export type CartItem = {
-  id: number
+  id: string
   name: string
   price: number
   quantity: number
@@ -11,9 +11,9 @@ export type CartItem = {
 type CartContextType = {
   cart: CartItem[]
   addToCart: (item: CartItem) => void
-  increaseQty: (id: number) => void
-  decreaseQty: (id: number) => void
-  removeFromCart: (id: number) => void
+  increaseQty: (id: string) => void
+  decreaseQty: (id: string) => void
+  removeFromCart: (id: string) => void
   clearCart: () => void
 }
 
@@ -34,7 +34,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     })
   }
 
-  const increaseQty = (id: number) => {
+  const increaseQty = (id: string) => {
     setCart(prev =>
       prev.map(item =>
         item.id === id
@@ -44,7 +44,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     )
   }
 
-  const decreaseQty = (id: number) => {
+  const decreaseQty = (id: string) => {
     setCart(prev =>
       prev
         .map(item =>
@@ -56,7 +56,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     )
   }
 
-  const removeFromCart = (id: number) => {
+  const removeFromCart = (id: string) => {
     setCart(prev => prev.filter(item => item.id !== id))
   }
 

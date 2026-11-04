@@ -7,7 +7,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 text-white mt-16 overflow-hidden">
+    <footer className="relative bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>

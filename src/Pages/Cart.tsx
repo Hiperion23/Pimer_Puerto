@@ -23,16 +23,19 @@ export default function Cart() {
     setSending(true)
     const phone = '56982955585'
 
-    let message = '🍽️ *Nuevo Pedido - Mi Primer Puerto*%0A%0A'
+    let message = '🍽️ *Nuevo Pedido - Mi Primer Puerto*\n\n'
     cart.forEach(item => {
-      message += `▸ ${item.quantity}x ${item.name}%0A  $${(
+      message += `▸ ${item.quantity}x ${item.name}\n  $${(
         item.price * item.quantity
-      ).toLocaleString('es-CL')}%0A%0A`
+      ).toLocaleString('es-CL')}\n\n`
     })
-    message += `━━━━━━━━━━━━━━━%0A💰 *TOTAL: $${total.toLocaleString('es-CL')}*`
+    message += `━━━━━━━━━━━━━━━\n💰 *TOTAL: $${total.toLocaleString('es-CL')}*`
 
     setTimeout(() => {
-      window.open(`https://wa.me/${phone}?text=${message}`, '_blank')
+      window.open(
+        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+        '_blank'
+      )
       setSending(false)
     }, 500)
   }
@@ -41,7 +44,6 @@ export default function Cart() {
     <div className="min-h-screen bg-slate-950 text-white">
       <div className="max-w-4xl mx-auto px-4 py-12">
 
-        {/* Header */}
         <div className="mb-12 flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
             <ShoppingBag className="w-7 h-7" />
@@ -63,14 +65,22 @@ export default function Cart() {
           </div>
         ) : (
           <>
-            {/* Items */}
             <div className="space-y-4 mb-8">
               {cart.map(item => (
                 <div
                   key={item.id}
                   className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 flex gap-5"
                 >
-                  {/* Info */}
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-20 h-20 rounded-xl object-cover shrink-0"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 rounded-xl bg-slate-800 shrink-0" />
+                  )}
+
                   <div className="flex-1">
                     <h3 className="font-bold text-lg">{item.name}</h3>
                     <p className="text-slate-400 text-sm mb-3">
@@ -107,7 +117,6 @@ export default function Cart() {
                     </div>
                   </div>
 
-                  {/* Precio */}
                   <div className="text-right font-bold text-lg text-cyan-400">
                     ${(item.price * item.quantity).toLocaleString('es-CL')}
                   </div>
@@ -115,7 +124,6 @@ export default function Cart() {
               ))}
             </div>
 
-            {/* Total */}
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-6">
               <div className="flex justify-between text-xl font-bold">
                 <span>Total</span>
@@ -123,7 +131,6 @@ export default function Cart() {
               </div>
             </div>
 
-            {/* WhatsApp */}
             <button
               onClick={sendWhatsApp}
               disabled={sending}

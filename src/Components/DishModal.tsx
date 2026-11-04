@@ -10,9 +10,6 @@ interface Props {
 export default function DishModal({ dish, onClose }: Props) {
   const { addToCart } = useCart()
 
-  // =========================
-  // Tipo de plato
-  // =========================
   const isCombo =
     dish.tags?.includes("Dúo") || dish.tags?.includes("Trío")
 
@@ -25,9 +22,6 @@ export default function DishModal({ dish, onClose }: Props) {
     i => !i.toLowerCase().includes("elige")
   )
 
-  // =========================
-  // Imágenes
-  // =========================
   const images =
     dish.images && dish.images.length > 0
       ? dish.images
@@ -35,9 +29,6 @@ export default function DishModal({ dish, onClose }: Props) {
       ? [dish.image]
       : []
 
-  // =========================
-  // Carousel
-  // =========================
   const [index, setIndex] = useState(0)
   const [offset, setOffset] = useState(0)
   const startX = useRef(0)
@@ -68,14 +59,10 @@ export default function DishModal({ dish, onClose }: Props) {
     setOffset(0)
   }
 
-  // =========================
-  // Render
-  // =========================
   return (
     <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-xl rounded-2xl overflow-hidden relative">
 
-        {/* Close */}
         <button
           onClick={onClose}
           className="absolute right-4 top-4 z-10 bg-black/60 text-white rounded-full w-8 h-8 flex items-center justify-center"
@@ -83,7 +70,6 @@ export default function DishModal({ dish, onClose }: Props) {
           ✕
         </button>
 
-        {/* Carousel */}
         <div
           className="relative h-64 overflow-hidden touch-pan-y"
           onTouchStart={e => start(e.touches[0].clientX)}
@@ -124,7 +110,6 @@ export default function DishModal({ dish, onClose }: Props) {
           )}
         </div>
 
-        {/* Content */}
         <div className="p-6">
           <h3 className="text-2xl font-semibold">{dish.name}</h3>
 
@@ -134,7 +119,6 @@ export default function DishModal({ dish, onClose }: Props) {
             {dish.price}
           </div>
 
-          {/* Badges */}
           {isSide && (
             <div className="mt-2 inline-block bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">
               🍟 Guarnición
@@ -147,7 +131,6 @@ export default function DishModal({ dish, onClose }: Props) {
             </div>
           )}
 
-          {/* Ingredientes normales */}
           {!isCombo && dish.ingredients && dish.ingredients.length > 0 && (
             <div className="mt-5">
               <h4 className="text-sm font-semibold mb-2">
@@ -161,7 +144,6 @@ export default function DishModal({ dish, onClose }: Props) {
             </div>
           )}
 
-          {/* Selector combo */}
           {isCombo && comboOptions && (
             <div className="mt-5">
               <h4 className="text-sm font-semibold mb-3">
@@ -205,14 +187,12 @@ export default function DishModal({ dish, onClose }: Props) {
             </div>
           )}
 
-          {/* Allergens */}
           {dish.allergens && dish.allergens.length > 0 && (
             <div className="mt-4 text-xs text-red-600">
               Alérgenos: {dish.allergens.join(", ")}
             </div>
           )}
 
-          {/* Add to cart */}
           <button
             disabled={
               isCombo &&
@@ -227,11 +207,10 @@ export default function DishModal({ dish, onClose }: Props) {
               }
 
               addToCart({
-                id: Number(dish.id),
+                id: String(dish.id),
                 name: dish.name,
-                price: Number(
-                  dish.price.replace(/\./g, "").replace("$", "")
-                ),
+                price: Number(dish.price),
+                image: images[0],
                 quantity: 1,
               })
 
@@ -246,10 +225,10 @@ export default function DishModal({ dish, onClose }: Props) {
             }`}
           >
             {isSide
-              ? "➕ Agregar guarnición"
+              ? "Agregar guarnición"
               : isCombo
-              ? "🧩 Agregar combo"
-              : "🛒 Agregar al pedido"}
+              ? "Agregar combo"
+              : "Agregar al pedido"}
           </button>
         </div>
       </div>
