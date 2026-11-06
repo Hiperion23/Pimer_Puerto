@@ -69,7 +69,7 @@ const features = [
   {
     icon: Clock,
     title: 'Horario Extendido',
-    text: 'Abierto todos los días de 19:00 a 00:00 hrs para que disfrutes cuando quieras.',
+    text: 'Abierto todos los días de 10:00 a 22:00 hrs para que disfrutes cuando quieras.',
     accent: COLORS.biolume,
   },
   {

@@ -1,133 +1,178 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { ShoppingCart } from 'lucide-react'
+import { Menu as MenuIcon, ShoppingCart, X } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import logo from '../assets/images/logo.png'
 
-const NavItem: React.FC<{
-  to: string
-  children: React.ReactNode
-  onClick?: () => void
-}> = ({ to, children, onClick }) => (
-  <NavLink
-    to={to}
+const links = [
+  { to: '/', label: 'Inicio', end: true },
+  { to: '/menu', label: 'Carta' },
+  { to: '/about', label: 'Nosotros' },
+  { to: '/contact', label: 'Contacto' },
+]
+
+const CartLink: React.FC<{ count: number; onClick?: () => void }> = ({
+  count,
+  onClick,
+}) => (
+  <Link
+    to="/carrito"
     onClick={onClick}
-    className={({ isActive }) =>
-      `
-      text-2xl font-semibold transition-colors
-      text-white md:text-gray-700
-      hover:text-sky-300 md:hover:text-sky-600
-      ${isActive ? 'md:text-sky-600' : ''}
-      `
-    }
+    aria-label={`Carrito, ${count} ${count === 1 ? 'producto' : 'productos'}`}
+    className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#EAF6F8] transition-colors hover:border-[#2FF3E0]/50 hover:text-[#2FF3E0]"
   >
-    {children}
-  </NavLink>
+    <ShoppingCart className="h-5 w-5" />
+    {count > 0 && (
+      <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#FF6B45] px-1 font-['JetBrains_Mono'] text-[11px] font-semibold text-[#060B14]">
+        {count}
+      </span>
+    )}
+  </Link>
 )
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { cart } = useCart()
 
-  const totalItems = cart.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  )
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
+
+  useEffect(() => {
+    if (!open) return
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = previous
+    }
+  }, [open])
 
   return (
     <>
-      {/* NAVBAR */}
-      <header className="backdrop-blur-sm bg-white/60 border-b border-gray-100 sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-
-          {/* LOGO */}
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#060B14]/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
           <Link to="/" className="flex items-center gap-3">
             <img
               src={logo}
               alt="Mi primer Puerto"
-              className="w-10 h-10 rounded-full object-cover border"
+              className="h-10 w-10 rounded-full border border-[#2FF3E0]/40 object-cover shadow-[0_0_18px_-4px_#2FF3E0]"
             />
             <div>
-              <h1 className="text-lg font-semibold">Mi primer Puerto</h1>
-              <p className="text-xs text-gray-500 -mt-0.5">
+              <span className="block font-['Chakra_Petch'] text-lg font-semibold leading-tight text-[#EAF6F8]">
+                Mi primer Puerto
+              </span>
+              <span className="-mt-0.5 block text-xs text-[#EAF6F8]/55">
                 Sabores del puerto · cocina original
-              </p>
+              </span>
             </div>
           </Link>
 
-          {/* DESKTOP MENU */}
-          <nav className="hidden md:flex items-center gap-3">
-            <NavLink to="/" className="px-3 py-2 rounded-md text-sm font-medium">Inicio</NavLink>
-            <NavLink to="/menu" className="px-3 py-2 rounded-md text-sm font-medium">Carta</NavLink>
-            <NavLink to="/about" className="px-3 py-2 rounded-md text-sm font-medium">Nosotros</NavLink>
-            <NavLink to="/contact" className="px-3 py-2 rounded-md text-sm font-medium">Contacto</NavLink>
+          <div className="flex items-center gap-2">
+            <nav aria-label="Principal" className="hidden items-center gap-1 md:flex">
+              {links.map(({ to, label, end }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={end}
+                  className={({ isActive }) =>
+                    `relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                      isActive
+                        ? 'text-[#2FF3E0]'
+                        : 'text-[#EAF6F8]/75 hover:text-[#EAF6F8]'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {label}
+                      <span
+                        aria-hidden="true"
+                        className={`absolute inset-x-4 bottom-0.5 h-px bg-[#2FF3E0] shadow-[0_0_8px_#2FF3E0] transition-opacity duration-300 ${
+                          isActive ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </nav>
 
-            {/* CARRITO */}
-            <Link to="/carrito" className="relative ml-2">
-              <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-sky-600 transition" />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  {totalItems}
-                </span>
-              )}
-            </Link>
-          </nav>
+            <div className="md:ml-2">
+              <CartLink count={totalItems} />
+            </div>
 
-          {/* HAMBURGER */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setOpen(true)}
-            aria-label="Abrir menú"
-          >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Abrir menú"
+              aria-expanded={open}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#EAF6F8] transition-colors hover:border-[#2FF3E0]/50 hover:text-[#2FF3E0] md:hidden"
+            >
+              <MenuIcon className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* MOBILE MENU */}
+      {/* Menú móvil */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-black/97 flex flex-col">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú principal"
+          className="fixed inset-0 z-50 flex flex-col bg-[#060B14] bg-[radial-gradient(ellipse_at_top_left,rgba(47,243,224,0.12)_0%,transparent_55%)]"
+        >
+          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3.5">
+            <span className="font-['Chakra_Petch'] text-lg font-semibold text-[#EAF6F8]">
+              Menú
+            </span>
 
-          {/* TOP BAR */}
-          <div className="flex items-center justify-between px-6 py-5 border-b text-white">
-            <span className="text-lg font-semibold">Menú</span>
-
-            <div className="flex items-center gap-4">
-              {/* CARRITO */}
-              <Link
-                to="/carrito"
-                onClick={() => setOpen(false)}
-                className="relative"
-              >
-                <ShoppingCart className="w-6 h-6" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
-              </Link>
-
-              {/* CLOSE */}
-              <button onClick={() => setOpen(false)} aria-label="Cerrar menú">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Cerrar menú"
+              autoFocus
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[#EAF6F8] transition-colors hover:border-[#2FF3E0]/50 hover:text-[#2FF3E0]"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
 
-          {/* LINKS */}
-          <nav className="flex-1 flex flex-col items-center justify-center gap-10">
-            <NavItem to="/" onClick={() => setOpen(false)}>Inicio</NavItem>
-            <NavItem to="/menu" onClick={() => setOpen(false)}>Carta</NavItem>
-            <NavItem to="/about" onClick={() => setOpen(false)}>Nosotros</NavItem>
-            <NavItem to="/contact" onClick={() => setOpen(false)}>Contacto</NavItem>
+          <nav
+            aria-label="Principal"
+            className="flex flex-1 flex-col justify-center px-6"
+          >
+            {links.map(({ to, label, end }, index) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                onClick={() => setOpen(false)}
+                className={({ isActive }) =>
+                  `flex items-baseline gap-4 border-b border-white/10 py-5 font-['Chakra_Petch'] text-4xl font-semibold transition-colors ${
+                    isActive
+                      ? 'text-[#2FF3E0]'
+                      : 'text-[#EAF6F8] hover:text-[#2FF3E0]'
+                  }`
+                }
+              >
+                <span className="font-['JetBrains_Mono'] text-sm font-normal text-[#2FF3E0]/70">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {label}
+              </NavLink>
+            ))}
           </nav>
 
-          <div className="pb-8 text-center text-sm text-gray-400">
-            © {new Date().getFullYear()} Mi primer Puerto
+          <div className="flex items-center justify-between px-6 pb-8 pt-4 text-sm text-[#EAF6F8]/50">
+            <span>© {new Date().getFullYear()} Mi primer Puerto</span>
+            <CartLink count={totalItems} onClick={() => setOpen(false)} />
           </div>
         </div>
       )}

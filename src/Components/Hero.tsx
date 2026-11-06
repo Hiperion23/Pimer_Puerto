@@ -163,7 +163,7 @@ export default function Hero() {
                   <div>
                     <div className="text-xs tracking-wider" style={{ color: '#6B8496', fontFamily: "'JetBrains Mono', monospace" }}>HORARIO</div>
                     <div className="mt-1" style={{ color: '#EAF6F8', fontFamily: "'Manrope', sans-serif", fontWeight: 600 }}>Lun – Dom</div>
-                    <div style={{ color: '#2FF3E0', fontFamily: "'JetBrains Mono', monospace", fontSize: '13px' }}>19:00 – 00:00</div>
+                    <div style={{ color: '#2FF3E0', fontFamily: "'JetBrains Mono', monospace", fontSize: '13px' }}>10:00 – 22:00</div>
                   </div>
                 </div>
               </div>

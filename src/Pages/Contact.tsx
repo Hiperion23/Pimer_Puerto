@@ -123,7 +123,7 @@ export default function Contact() {
                     <div>
                       <p className="font-semibold text-gray-900">Horario</p>
                       <p className="text-gray-600 text-sm mt-1">Lunes - Domingo</p>
-                      <p className="text-gray-900 font-medium text-sm">19:00 - 00:00 hrs</p>
+                      <p className="text-gray-900 font-medium text-sm">10:00 - 22:00 hrs</p>
                     </div>
                   </div>
                 </div>
