@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react'
 import DishCard from '../Components/DishCard'
 import type { Dish } from '../Components/DishCard'
@@ -499,8 +500,10 @@ export default function Menu() {
         )}
       </main>
 
-      {selectedDish && (
-        <DishModal dish={selectedDish} onClose={() => setSelectedDish(null)} />
+      {selectedDish &&
+        createPortal(
+          <DishModal dish={selectedDish} onClose={() => setSelectedDish(null)} />,
+          document.body
       )}
     </div>
   )
